@@ -38,7 +38,7 @@ public class App {
 
         wordleDatabaseConnection.createNewDatabase("words.db");
         if (wordleDatabaseConnection.checkIfConnectionDefined()) {
-            System.out.println("Wordle created and connected.");
+            logger.log(Level.FINE, "Wordle created and connected.");
         } else {
             System.out.println("Not able to connect. Sorry!");
             return;
@@ -72,8 +72,8 @@ public class App {
         try (Scanner scanner = new Scanner(System.in)) {
             System.out.print("Enter a 4 letter word for a guess or q to quit: ");
             String guess = "";
-            if(scanner.hasNext("^[a-z0-9]{3,10}$")){
-                guess = scanner.nextLine();
+            while(scanner.hasNext("^[a-z0-9]{0,5}$")){
+                guess = scanner.next();
             }
             while ((!guess.equals("q")) && (guess.length() <=4)) {
                 System.out.println("You've guessed '" + guess+"'.");
