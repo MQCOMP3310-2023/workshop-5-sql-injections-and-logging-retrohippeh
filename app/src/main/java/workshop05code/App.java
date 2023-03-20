@@ -71,9 +71,11 @@ public class App {
 
         try (Scanner scanner = new Scanner(System.in)) {
             System.out.print("Enter a 4 letter word for a guess or q to quit: ");
-            String guess = scanner.nextLine();
-
-            while (!guess.equals("q")) {
+            String guess = "";
+            if(scanner.hasNext("^[a-z0-9]{3,10}$")){
+                guess = scanner.nextLine();
+            }
+            while ((!guess.equals("q")) && (guess.length() <=4)) {
                 System.out.println("You've guessed '" + guess+"'.");
 
                 if (wordleDatabaseConnection.isValidWord(guess)) { 
